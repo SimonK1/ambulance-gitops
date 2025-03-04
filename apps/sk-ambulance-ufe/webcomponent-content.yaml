@@ -1,10 +1,13 @@
 apiVersion: polyfea.github.io/v1alpha1
 kind: WebComponent
 metadata:
-  name: sk-ambulance-wl-app
+  name: sk-ambulance-ufe-content
 spec:
   microFrontend: sk-ambulance-ufe
-  element: /sk-ambulance-wl/
+  element: sk-ambulance-wl-app
+  attributes:
+    - name: base-path
+      value: /sk-ambulance-wl/
   displayRules:
     - allOf:
       - context-name: main-content
