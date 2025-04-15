@@ -9,6 +9,11 @@ labels:
 
 resources:
 - ../../../apps/sk-ambulance-ufe
+- ../../../apps/sk-ambulance-webapi
+
+patches:
+- path: patches/ambulance-webapi.service.yaml
 
 components:
 - ../../../components/version-developers
+- https://github.com/SimonK1/ambulance-webapi//deployments/kustomize/components/mongodb
