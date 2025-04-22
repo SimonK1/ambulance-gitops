@@ -1,0 +1,46 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: polyfea-controller
+  namespace: polyfea
+spec:
+  parentRefs:
+    - name: wac-hospital-gateway
+      namespace: wac-hospital
+    - name: wac-hospital-gateway  # Hack to make it work for common cluster
+      namespace: wac-hospital-system
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /fea
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: polyfea-controller
+          port: 80
+    - matches:
+      - path:
+          type: Exact
+          value: /
+      filters:
+      - type: RequestRedirect
+        requestRedirect:
+          path:
+            type: ReplaceFullPath
+            replaceFullPath: /fea
+    - matches:
+      - path:
+          type: Exact
+          value: /sk-openapi
+      filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplaceFullPath
+            replaceFullPath: /openapi
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: sk-ambulance-webapi
+          port: 80
