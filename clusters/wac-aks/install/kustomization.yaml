@@ -12,6 +12,7 @@ labels:
 
 resources:
 - ../../../apps/sk-ambulance-ufe
+- ../../../apps/sk-ambulance-webapi
 
 
 components:
