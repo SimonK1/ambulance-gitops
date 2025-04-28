@@ -29,6 +29,8 @@ spec:
           path:
             type: ReplaceFullPath
             replaceFullPath: /fea
+          scheme: https
+          port: 443
     - matches:
       - path:
           type: Exact
